@@ -6,6 +6,7 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 
 const register = async (req, res, next) => {
+  console.log("Request body:", req.body); // Logging the request body
   let catchImg = req.file?.path;
 
   try {
@@ -13,10 +14,7 @@ const register = async (req, res, next) => {
     let confirmationCode = randomCode();
     const { email, name } = req.body;
 
-    const userExist = await User.findOne(
-      { email: req.body.email },
-      { name: req.body.name }
-    );
+    const userExist = await User.findOne({ email: req.body.email });
 
     if (!userExist) {
       const newUser = new User({ ...req.body, confirmationCode });

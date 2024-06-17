@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
-    userName: {
+    name: {
       type: String,
       required: true,
       unique: true,
@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema(
     },
     confirmationCode: {
       type: Number,
-      required: true,
+      required: false,
     },
     check: {
       type: Boolean,
