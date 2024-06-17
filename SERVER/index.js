@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-// import mongoose from "mongoose";
 
 import { connect } from "./src/utils/db.js";
 import { configCloudinary } from "./src/middleware/files.middleware.js";
