@@ -31,10 +31,14 @@ const Register = () => {
 
         alert("Registration successful! Check you emial for confirmation code");
       } else {
-        alert(`Registration failed`);
+        alert(
+          `Registration failed: invalid input, missing data, server-side validation errors, rate limiting, and other API-specific errors`
+        );
       }
     } catch (error) {
-      alert(`Registration failed`);
+      alert(
+        `Registration failed: something went wrong outside of the normal response handling, likely an issue with the network, server, or unhandled exceptions in the code.`
+      );
       console.error(error);
     }
   };
