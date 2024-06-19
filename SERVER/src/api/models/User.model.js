@@ -17,7 +17,6 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       unique: true,
       validate: [validator.isEmail, "Email not valid"],
-      // Si el email no es válido, se lanzará el error ----> "Email not valid"
     },
     password: {
       type: String,
@@ -28,14 +27,14 @@ const UserSchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    confirmationCode: {
-      type: Number,
-      required: false,
-    },
-    check: {
-      type: Boolean,
-      default: false,
-    },
+    // confirmationCode: {
+    //   type: Number,
+    //   required: false,
+    // },
+    // check: {
+    //   type: Boolean,
+    //   default: false,
+    // },
   },
 
   {

@@ -4,6 +4,7 @@ import cors from "cors";
 
 import { connect } from "./src/utils/db.js";
 import { configCloudinary } from "./src/middleware/files.middleware.js";
+import UserRoutes from "./src/api/routes/User.routes.js";
 
 //! Initialize environment variables
 dotenv.config();
@@ -23,8 +24,7 @@ configCloudinary();
 connect();
 
 //! ROUTES
-import UserRoutes from "./src/api/routes/User.routes.js";
-app.use("/api/v1/user/", UserRoutes);
+app.use("/auth", UserRoutes);
 
 app.use("*", (req, res, next) => {
   const error = new Error("Route not found");

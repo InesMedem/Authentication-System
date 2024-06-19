@@ -6,7 +6,7 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 
 const register = async (req, res, next) => {
-  console.log("Request body:", req.body); // Logging the request body
+  console.log("Request body:", req.body);
   let catchImg = req.file?.path;
 
   try {
