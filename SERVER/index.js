@@ -26,6 +26,8 @@ connect();
 //! ROUTES
 app.use("/auth", UserRoutes);
 
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
 app.use("*", (req, res, next) => {
   const error = new Error("Route not found");
   error.status = 404;
