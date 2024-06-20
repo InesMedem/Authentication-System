@@ -17,4 +17,10 @@ const registerUser = async (formData) => {
     .catch((error) => error);
 };
 
-export default registerUser;
+const loginUser = async (formData) => {
+  return APIGeneral.post("/auth/login", formData)
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export default { registerUser, loginUser };

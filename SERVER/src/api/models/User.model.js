@@ -27,14 +27,14 @@ const UserSchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    // confirmationCode: {
-    //   type: Number,
-    //   required: false,
-    // },
-    // check: {
-    //   type: Boolean,
-    //   default: false,
-    // },
+    confirmationCode: {
+      type: Number,
+      required: false,
+    },
+    check: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   {

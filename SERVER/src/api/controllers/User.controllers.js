@@ -75,4 +75,24 @@ const register = async (req, res, next) => {
   }
 };
 
-export default register;
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const userDB = await User.findOne({ email });
+    if (userDB) {
+      if (bcrypt.compareSync(password, userDB.password)) {
+        const token = generateToken(userDB._id, email);
+        return res.status(200).json({
+          user: userDB,
+          token,
+        });
+      } else {
+        return res.status(404).json("password doesn't match");
+      }
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export { register, login };
