@@ -23,4 +23,4 @@ const loginUser = async (formData) => {
     .catch((error) => error);
 };
 
-export default { registerUser, loginUser };
+export { registerUser, loginUser };
