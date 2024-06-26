@@ -95,4 +95,6 @@ const login = async (req, res, next) => {
   }
 };
 
+// const changepassword = async (req, res, next)
+
 export { register, login };

@@ -1,0 +1,41 @@
+/* Container for the navigation menu */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Styling for the links in the navigation menu */
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Add a background color on hover */
+  .navbar a:hover {
+    background-color: #555;
+  }
+  
+  /* Styling for the logout button */
+  .navbar button {
+    background-color: #ff4b5c;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Add a background color on hover for the button */
+  .navbar button:hover {
+    background-color: #ff1c3a;
+  }
+  
