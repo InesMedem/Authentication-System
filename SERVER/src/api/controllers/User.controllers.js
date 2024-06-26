@@ -4,6 +4,7 @@ import randomCode from "../../utils/randomCode.js";
 import nodemailer from "nodemailer";
 import validator from "validator";
 import bcrypt from "bcrypt";
+import { generateToken } from "../../utils/token.js";
 
 const register = async (req, res, next) => {
   console.log("Request body:", req.body);
