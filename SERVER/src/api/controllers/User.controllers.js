@@ -3,7 +3,7 @@ import User from "../models/User.model.js";
 import randomCode from "../../utils/randomCode.js";
 import nodemailer from "nodemailer";
 import validator from "validator";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import { generateToken } from "../../utils/token.js";
 
 const register = async (req, res, next) => {
@@ -81,7 +81,7 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
     const userDB = await User.findOne({ email });
     if (userDB) {
-      if (bcrypt.compareSync(password, userDB.password)) {
+      if (bcryptjs.compareSync(password, userDB.password)) {
         const token = generateToken(userDB._id, email);
         return res.status(200).json({
           user: userDB,
