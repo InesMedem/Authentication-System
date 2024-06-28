@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const APIGeneral = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: "https://authentication-system-seven.vercel.app",
   // timeout: 600,
   headers: {
     Accept: "application/json",
