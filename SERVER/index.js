@@ -14,6 +14,18 @@ const MONGO_URI = process.env.MONGO_URI;
 //! create express app
 const app = express();
 
+//! CORS config
+
+// app.use(cors());
+
+app.use(
+  cors({
+    origin: "https://authentication-system-ltp2.vercel.app",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    credentials: true, // Include credentials if required
+  })
+);
+
 //! Apply middleware
 app.use(cors());
 app.use(express.json());
