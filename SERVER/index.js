@@ -6,15 +6,22 @@ import { connect } from "./src/utils/db.js";
 import { configCloudinary } from "./src/middleware/files.middleware.js";
 import UserRoutes from "./src/api/routes/User.routes.js";
 
+//! create express app
+const app = express();
+
 //! Initialize environment variables
 dotenv.config();
 const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
 
-//! create express app
-const app = express();
+//! Connect to the database
+connect();
 
-//! CORS config
+//! Apply middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+configCloudinary();
 
 // app.use(cors());
 
@@ -25,15 +32,6 @@ app.use(
     credentials: true, // Include credentials if required
   })
 );
-
-//! Apply middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-configCloudinary();
-
-//! Connect to the database
-connect();
 
 //! ROUTES
 app.use("/auth", UserRoutes);
