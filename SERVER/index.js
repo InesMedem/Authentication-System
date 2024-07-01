@@ -37,7 +37,7 @@ app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ limit: "5mb", extended: false }));
 
 //! ROUTES
-app.use("/auth", UserRoutes);
+app.use("/", UserRoutes);
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 

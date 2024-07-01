@@ -7,13 +7,9 @@ const UserRoutes = express.Router();
 
 UserRoutes.post("/register", upload.single("image"), register);
 UserRoutes.post("/login", login);
-//resend code
-//forgot password etc
 
 //! ---------------- endPoints con auth -----------------------------
 
-// change password
-// update
 UserRoutes.patch("/changepassword", [isAuth]);
 
 export default UserRoutes;

@@ -10,7 +10,7 @@ const APIGeneral = axios.create({
 });
 
 const registerUser = async (formData) => {
-  return APIGeneral.post("/auth/register", formData, {
+  return APIGeneral.post("/register", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   })
     .then((res) => res)
@@ -18,7 +18,7 @@ const registerUser = async (formData) => {
 };
 
 const loginUser = async (formData) => {
-  return APIGeneral.post("/auth/login", formData)
+  return APIGeneral.post("/login", formData)
     .then((res) => res)
     .catch((error) => error);
 };
