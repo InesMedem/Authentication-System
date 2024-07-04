@@ -7,19 +7,23 @@ import { AuthContext } from "../context/authContext";
 // const { user, logout } = useContext(AuthContext);
 
 export const NavMenu = () => {
-  // const [cookies, setCookies] = useCookies(["access_token"]);
-  // const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  // const handleLogout = () => {
-  //   logout();
-  //   // navigate("/auth")
-  // };
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <div className="navbar">
       <NavLink to="/">Home</NavLink>
       <NavLink to="/register">Register</NavLink>
-      <NavLink to="/login">Login</NavLink>
+      {user ? (
+        <button onClick={handleLogout}>Logout</button>
+      ) : (
+        <NavLink to="/login">Login</NavLink>
+      )}
     </div>
   );
 };
