@@ -1,10 +1,14 @@
-import { useState } from "react";
-import { loginUser } from "../api/api.js";
+import { useContext, useState } from "react";
+// import { loginUser } from "../api/api.js";
+
 import "./Login.css";
+import { AuthContext } from "../context/authContext.jsx";
+import { loginUser } from "../api/api.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,6 +22,9 @@ const Login = () => {
       const response = await loginUser(formData); // Calling the loginUser function from API.js
 
       if (response.status === 200) {
+        // Update context with login function
+        login(formData);
+
         // Resetting form fields after successful login
         setEmail("");
         setPassword("");
@@ -25,7 +32,7 @@ const Login = () => {
         alert("Login successful!");
       } else {
         alert(
-          `Login failed: invalid credentials, server-side validation errors, rate limiting, and other API-specific errors`
+          `Login failed: ${response.data.message} invalid credentials, server-side validation errors, rate limiting, and other API-specific errors`
         );
       }
     } catch (error) {
