@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 // import { loginUser } from "../api/api.js";
 
-import "./Login.css";
 import { AuthContext } from "../context/authContext.jsx";
 import { loginUser } from "../api/api.js";
 
@@ -44,9 +43,9 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h2>User Login</h2>
-      <form id="loginForm" onSubmit={handleSubmit}>
+    <div className="container">
+      <h2 className="title">User Login</h2>
+      <form className="form-row" id="loginForm" onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -67,7 +66,10 @@ const Login = () => {
 
         <button type="submit">Login</button>
       </form>
-    </>
+      <p>
+        Don't have an account? <a href="/register">Register here</a>.
+      </p>
+    </div>
   );
 };
 

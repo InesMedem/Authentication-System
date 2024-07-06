@@ -1,4 +1,3 @@
-import "./NavMenu.css";
 import { NavLink, useNavigate } from "react-router-dom";
 // import { useContext } from "react";
 // import { AuthContext } from "../context/authContext";
@@ -14,15 +13,22 @@ export const NavMenu = () => {
   // };
 
   return (
-    <div className="navbar">
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/register">Register</NavLink>
+    <div className="container justify-between ">
+      <button className="btn-hipster">
+        <NavLink to="/">Home</NavLink>
+      </button>
+
+      <button className="btn-hipster">
+        <NavLink to="/register">Register</NavLink>
+      </button>
       {/* {user ? (
         <button onClick={handleLogout}>Logout</button>
       ) : (
         <NavLink to="/login">Login</NavLink>
       )} */}
-      <NavLink to="/login">Login</NavLink>
+      <button className="btn-hipster">
+        <NavLink to="/login">Login</NavLink>
+      </button>
     </div>
   );
 };
