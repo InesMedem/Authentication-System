@@ -18,7 +18,7 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://authentication-front-seven.vercel.app"
+          "value": "https://authentication-system-ltp2.vercel.app"
         },
         {
           "key": "Access-Control-Allow-Methods",
