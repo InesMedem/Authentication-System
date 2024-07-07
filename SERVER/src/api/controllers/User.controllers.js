@@ -90,6 +90,8 @@ const login = async (req, res, next) => {
       } else {
         return res.status(404).json("password doesn't match");
       }
+    } else {
+      return res.status(404).json("user not found");
     }
   } catch (error) {
     return next(error);
