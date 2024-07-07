@@ -9,24 +9,12 @@
   "routes": [
     {
       "src": "/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://authentication-system-ltp2.vercel.app"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, OPTIONS, POST, PATCH, DELETE"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
-        },
-        {
-          "key": "Access-Control-Allow-Credentials",
-          "value": "true"
-        }
-      ],
+      "headers": {
+        "Access-Control-Allow-Origin": "https://authentication-system-ltp2.vercel.app",
+        "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PATCH, DELETE",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      },
       "dest": "/index.js"
     }
   ]
