@@ -1,8 +1,5 @@
 import { useContext, useState } from "react";
-// import { loginUser } from "../api/api.js";
-
 import { AuthContext } from "../context/authContext.jsx";
-import { loginUser } from "../api/api.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -58,7 +55,7 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
       <p>
-        Don't have an account? <a href="/register">Register here</a>.
+        Do not have an account? <a href="/register">Register here</a>.
       </p>
     </div>
   );

@@ -18,21 +18,10 @@ connect();
 configCloudinary();
 
 const PORT = process.env.PORT;
-// const MONGO_URI = process.env.MONGO_URI;
 
 app.use(cors());
 
 //! Apply middleware
-// app.use(cors());
-
-// app.use(
-//   cors({
-//     origin: "https://authentication-system-ltp2.vercel.app",
-//     methods: ["GET", "POST", "PATCH", "DELETE"],
-//     credentials: true, // Include credentials if required
-//   })
-// );
-
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ limit: "5mb", extended: false }));
 

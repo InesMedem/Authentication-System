@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
 
   const register = async (formData) => {
     try {
-      const response = await registerUser.registerUser(formData);
+      const response = await registerUser(formData);
       localStorage.setItem("token", response.data.token);
       setUser(response.data.user);
     } catch (error) {

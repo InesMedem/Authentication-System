@@ -1,34 +1,38 @@
 import { NavLink, useNavigate } from "react-router-dom";
-// import { useContext } from "react";
-// import { AuthContext } from "../context/authContext";
+import { useContext } from "react";
+import { AuthContext } from "../context/authContext";
 
 export const NavMenu = () => {
-  // const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const handleLogout = () => {
-  //   logout();
-  //   navigate("/login");
-  // };
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <div className="container justify-between ">
-      <button className="btn-hipster">
-        <NavLink to="/">Home</NavLink>
-      </button>
+      <NavLink to="/">
+        <button>Home</button>
+      </NavLink>
 
-      <button className="btn-hipster">
-        <NavLink to="/register">Register</NavLink>
-      </button>
-      {/* {user ? (
-        <button onClick={handleLogout}>Logout</button>
+      <NavLink to="/register">
+        <button> Register</button>
+      </NavLink>
+
+      {user ? (
+        <NavLink>
+          <button className="danger-btn" onClick={handleLogout}>
+            Logout
+          </button>
+        </NavLink>
       ) : (
-        <NavLink to="/login">Login</NavLink>
-      )} */}
-      <button className="btn-hipster">
-        <NavLink to="/login">Login</NavLink>
-      </button>
+        <NavLink to="/login">
+          <button>Login </button>
+        </NavLink>
+      )}
     </div>
   );
 };
