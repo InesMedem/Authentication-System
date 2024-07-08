@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (formData) => {
     try {
-      const response = await loginUser.loginUser(formData);
+      const response = await loginUser(formData);
       localStorage.setItem("token", response.data.token);
       setUser(response.data.user);
     } catch (error) {

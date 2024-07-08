@@ -18,22 +18,13 @@ const Login = () => {
     };
 
     try {
-      const response = await loginUser(formData); // Calling the loginUser function from API.js
+      await login(formData); // Calling the loginUser function from API.js
 
-      if (response.status === 200) {
-        // Update context with login function
-        login(formData);
+      // Resetting form fields after successful login
+      setEmail("");
+      setPassword("");
 
-        // Resetting form fields after successful login
-        setEmail("");
-        setPassword("");
-
-        alert("Login successful!");
-      } else {
-        alert(
-          `Login failed: ${response.data.message} invalid credentials, server-side validation errors, rate limiting, and other API-specific errors`
-        );
-      }
+      alert("Login successful!");
     } catch (error) {
       alert(
         `Login failed: something went wrong outside of the normal response handling, likely an issue with the network, server, or unhandled exceptions in the code.`
