@@ -7,7 +7,7 @@ import bcryptjs from "bcryptjs";
 import { generateToken } from "../../utils/token.js";
 
 const register = async (req, res, next) => {
-  console.log("Request body:", req.body);
+  // console.log("Request body:", req.body);
   let catchImg = req.file?.path;
 
   try {
@@ -98,6 +98,59 @@ const login = async (req, res, next) => {
   }
 };
 
-// const changepassword = async (req, res, next)
+const resetPassword = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    // variable to store the user with the email
+    const userDB = await User.findOne({ email });
 
-export { register, login };
+    // if the user exists
+    if (userDB) {
+      // get env variables
+      const emailEnv = process.env.EMAIL;
+      const password = process.env.PASSWORD;
+      // send email
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: emailEnv,
+          pass: password,
+        },
+      });
+
+      const mailOptions = {
+        from: emailEnv,
+        to: email,
+        subject: "Reset Password",
+        text: `Your new password is ${newPassword}`,
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          return res.status(404).json({
+            user: userSave,
+            confirmationCode: "error, resend code",
+          });
+        }
+        // respond status 200
+        console.log("Email sent: " + info.response);
+        return res.status(200).json({
+          user: userSave,
+          confirmationCode,
+        });
+      });
+    } else {
+      // email failed to send
+      return res.status(404).json("user not found");
+    }
+    // something is wrong with the resetPassword function in the API file
+  } catch (error) {
+    return res.status(404).json(error.message);
+  }
+  console.log(
+    "🚀 ~ something is wrong with the resetPassword function in the API file",
+    message
+  );
+};
+export { register, login, resetPassword };

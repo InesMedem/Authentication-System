@@ -14,7 +14,6 @@ dotenv.config();
 
 //! Connect to the database
 connect();
-
 configCloudinary();
 
 const PORT = process.env.PORT;

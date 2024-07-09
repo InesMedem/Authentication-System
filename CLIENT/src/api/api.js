@@ -24,4 +24,11 @@ const loginUser = async (formData) => {
     .catch((error) => error);
 };
 
-export { registerUser, loginUser };
+const resetPassword = async (formData) => {
+  console.log("🚀 ~ resetPassword ~ formData:", formData);
+  return APIGeneral.post("/resetpassword", formData)
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export { registerUser, loginUser, resetPassword };
