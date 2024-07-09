@@ -13,14 +13,14 @@ export const NavMenu = () => {
   };
 
   return (
-    <div className="container justify-between ">
-      <NavLink to="/">
-        <button>Home</button>
-      </NavLink>
+    <nav>
+      <NavLink to="/">Home</NavLink>
 
-      <NavLink to="/register">
-        <button> Register</button>
-      </NavLink>
+      {user === null && (
+        <NavLink to="/register">
+          <button> Register</button>
+        </NavLink>
+      )}
 
       {user ? (
         <NavLink>
@@ -33,6 +33,12 @@ export const NavMenu = () => {
           <button>Login </button>
         </NavLink>
       )}
-    </div>
+
+      {user !== null ? (
+        <NavLink to="/dashboard">
+          <img className="icon" src={user?.image} alt={user?.user} />
+        </NavLink>
+      ) : null}
+    </nav>
   );
 };

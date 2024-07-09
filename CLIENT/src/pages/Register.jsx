@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { registerUser } from "../api/api.js";
+import { Link } from "react-router-dom";
+import FormRow from "../components/FormRow.jsx";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -44,10 +46,10 @@ const Register = () => {
 
   return (
     <>
-      <h2>User Registration</h2>
-      <form id="registrationForm" onSubmit={handleSubmit}>
+      <form className="form" id="registrationForm" onSubmit={handleSubmit}>
+        <h4>User Registration</h4>
         <label htmlFor="name">Username:</label>
-        <input
+        <FormRow
           type="text"
           id="name"
           value={name}
@@ -56,7 +58,7 @@ const Register = () => {
         />
 
         <label htmlFor="email">Email:</label>
-        <input
+        <FormRow
           type="email"
           id="email"
           value={email}
@@ -65,7 +67,11 @@ const Register = () => {
         />
 
         <label htmlFor="password">Password:</label>
-        <input
+        {/* <p className="text-small">
+          Your new password must be at least 8 characters long, with at least 1
+          lowercase letter, 1 uppercase letter, 1 number, and 1 symbol.
+        </p> */}
+        <FormRow
           type="password"
           id="password"
           value={password}
@@ -74,14 +80,22 @@ const Register = () => {
         />
 
         <label htmlFor="profileImage">Profile Image (optional):</label>
-        <input
+        <FormRow
           type="file"
           id="image"
           onChange={(e) => setImage(e.target.files[0])}
           accept="image/*"
         />
 
-        <button type="submit">Register</button>
+        <button type="submit" className="btn-block">
+          Register
+        </button>
+        <p>
+          Already a member yet?
+          <Link to="/login" className="member-btn">
+            Login
+          </Link>
+        </p>
       </form>
     </>
   );

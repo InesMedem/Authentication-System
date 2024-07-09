@@ -1,0 +1,17 @@
+.icon {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    border-radius: 100%;
+    border: 2px solid var(--primary-700);
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+    background: var(--white);
+    box-shadow: var(--shadow-1);
+}

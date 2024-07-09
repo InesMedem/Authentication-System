@@ -1,8 +1,12 @@
-import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Register from "../pages/Register";
-import Login from "../pages/Login";
-import { Profile } from "../pages/Profile";
+import { createBrowserRouter } from "react-router-dom";
+import {
+  Login,
+  Register,
+  ResetPassword,
+  Dashboard,
+  ChangePassword,
+} from "../pages";
 
 export const router = createBrowserRouter([
   {
@@ -17,10 +21,22 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      // {
+      //   path: "/profile",
+      //   element: <Profile />,
+      // },
       {
-        path: "/profile",
-        // protected
-        element: <Profile />,
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+
+      {
+        path: "/resetpassword",
+        element: <ResetPassword />,
+      },
+      {
+        path: "/changepassword",
+        element: <ChangePassword />,
       },
     ],
   },
