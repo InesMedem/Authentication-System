@@ -25,7 +25,6 @@ const loginUser = async (formData) => {
 };
 
 const resetPassword = async (formData) => {
-  console.log("🚀 ~ resetPassword ~ formData:", formData);
   return APIGeneral.post("/resetpassword", formData)
     .then((res) => res)
     .catch((error) => error);

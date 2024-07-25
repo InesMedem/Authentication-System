@@ -12,7 +12,6 @@ const UserRoutes = express.Router();
 UserRoutes.post("/register", upload.single("image"), register);
 UserRoutes.post("/login", login);
 UserRoutes.post("/resetpassword", resetPassword);
-console.log("🚀 ~ resetPassword:", resetPassword);
 
 //! ---------------- endPoints con auth -----------------------------
 

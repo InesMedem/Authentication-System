@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
 import FormRow from "../components/FormRow";
+import { useAuth } from "../context/authContext";
 
 const Dashboard = () => {
+  const { user } = useAuth();
+
   return (
     <div className="form">
       <h4 className="title">Update info</h4>
       <p>
-        Hi <span>Ines Medem </span>, you can make changes to your user profile
+        Hi
+        <span>
+          <strong> {user?.name} </strong>
+        </span>
+        , you can make changes to your user profile
       </p>
       <form>
         <label>Change username</label>

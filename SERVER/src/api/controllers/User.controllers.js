@@ -7,15 +7,20 @@ import bcryptjs from "bcryptjs";
 import { generateToken } from "../../utils/token.js";
 
 const register = async (req, res, next) => {
-  // console.log("Request body:", req.body);
+  console.log("INSIDE CONTROLLER Request body:", req.body);
+  console.log("File:", req.file);
+
   let catchImg = req.file?.path;
 
   try {
     await User.syncIndexes();
+    console.log("Indexes synced");
+
     let confirmationCode = randomCode();
     const { email, name } = req.body;
 
     const userExist = await User.findOne({ email: req.body.email });
+    console.log("User exists:", userExist);
 
     if (!userExist) {
       const newUser = new User({ ...req.body, confirmationCode });
@@ -28,6 +33,7 @@ const register = async (req, res, next) => {
 
       try {
         const userSave = await newUser.save();
+        console.log("User saved:", userSave);
 
         if (userSave) {
           const emailEnv = process.env.EMAIL;
@@ -50,7 +56,7 @@ const register = async (req, res, next) => {
 
           transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-              console.log(error);
+              console.log("Email error:", error);
               return res.status(404).json({
                 user: userSave,
                 confirmationCode: "error, resend code",
@@ -64,13 +70,16 @@ const register = async (req, res, next) => {
           });
         }
       } catch (error) {
+        console.log("Error saving user:", error);
         return res.status(404).json(error.message);
       }
     } else {
       if (req.file) deleteImgCloudinary(catchImg);
+      console.log("User already exists");
       return res.status(409).json("this user already exist");
     }
   } catch (error) {
+    console.log("Error in try-catch:", error);
     if (req.file) deleteImgCloudinary(catchImg);
     return next(error);
   }

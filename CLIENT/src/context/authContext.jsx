@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types"; // Import PropTypes
 import { loginUser, registerUser } from "../api/api.js";
@@ -7,6 +7,12 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  //   () => {
+  //   const user = localStorage.getItem("user");
+  //   return user ? JSON.parse(user) : null;
+  // });
+
   const [loading, setLoading] = useState(true);
 
   //* Function to check if user is authenticated
@@ -77,3 +83,5 @@ AuthProvider.propTypes = {
 };
 
 export { AuthContext, AuthProvider };
+
+export const useAuth = () => useContext(AuthContext);
