@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(AuthContext);
+  const { user, login } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
