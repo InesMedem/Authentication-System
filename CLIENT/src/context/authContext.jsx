@@ -55,6 +55,7 @@ const AuthProvider = ({ children }) => {
       const response = await registerUser(formData);
       localStorage.setItem("token", response.data.token);
       setUser(response.data.user);
+      return response;
     } catch (error) {
       console.error("Registration failed:", error);
       throw error;

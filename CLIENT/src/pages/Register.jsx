@@ -24,9 +24,9 @@ const Register = () => {
     // }
 
     try {
-      await register(formData);
+      const response = await register(formData);
 
-      if (register.status === 200) {
+      if (response.status === 200) {
         setName("");
         setEmail("");
         setPassword("");

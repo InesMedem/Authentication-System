@@ -14,7 +14,10 @@ const registerUser = async (formData) => {
   return APIGeneral.post("/register", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   })
-    .then((res) => res)
+    .then((res) => {
+      console.log("🚀 ~ registerUser ~ res:", res);
+      return res;
+    })
     .catch((error) => error);
 };
 
