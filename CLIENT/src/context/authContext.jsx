@@ -48,24 +48,16 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     const token = localStorage.getItem("token");
-    if (token)
-      // {
-      // try {
-      //   const response = await axios.get("/auth/me", {
-      //     headers: { Authorization: `Bearer ${token}` },
-      //   });
-      setUser(JSON.parse(localStorage.getItem("user")));
-    // } catch (error) {
-    //   console.error("Error checking authentication:", error);
-    //   setUser(null);
-    // }
-    // } else {
-    // const userString = localStorage.getItem("user");
-    // if (userString) {
-    //   setUser(JSON.parse(userString));
-    // } else {
-    // setUser(null);
-    // }
+    if (token) {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      } else {
+        setUser(null);
+      }
+    } else {
+      setUser(null);
+    }
   };
 
   //* Login function
