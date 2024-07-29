@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
-import PropTypes from "prop-types"; // Import PropTypes
 import { loginUser, registerUser } from "../api/api.js";
+import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
@@ -45,20 +44,6 @@ export const AuthProvider = ({ children }) => {
   // };
 
   //* Function to check if user is authenticated
-
-  const checkAuth = async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      } else {
-        setUser(null);
-      }
-    } else {
-      setUser(null);
-    }
-  };
 
   //* Login function
 
@@ -106,8 +91,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    //* Call checkAuth inside the useEffect to handle both authentication checks and local storage rehydration
-    checkAuth();
+    // Check local storage for user data on app load
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
   }, []);
 
   return (
