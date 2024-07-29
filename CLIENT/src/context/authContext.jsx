@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     return user ? JSON.parse(user) : null;
   });
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   // const [deleteUser, setDeleteUser] = useState(false);
 
@@ -48,25 +48,24 @@ const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     const token = localStorage.getItem("token");
-    if (token) {
-      try {
-        const response = await axios.get("/auth/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(response.data.user);
-      } catch (error) {
-        console.error("Error checking authentication:", error);
-        setUser(null);
-      }
-    } else {
-      // const userString = localStorage.getItem("user");
-      // if (userString) {
-      //   setUser(JSON.parse(userString));
-      // } else {
-      setUser(null);
-      // }
-    }
-    setLoading(false);
+    if (token)
+      // {
+      // try {
+      //   const response = await axios.get("/auth/me", {
+      //     headers: { Authorization: `Bearer ${token}` },
+      //   });
+      setUser(JSON.parse(localStorage.getItem("user")));
+    // } catch (error) {
+    //   console.error("Error checking authentication:", error);
+    //   setUser(null);
+    // }
+    // } else {
+    // const userString = localStorage.getItem("user");
+    // if (userString) {
+    //   setUser(JSON.parse(userString));
+    // } else {
+    // setUser(null);
+    // }
   };
 
   //* Login function
@@ -80,16 +79,13 @@ const AuthProvider = ({ children }) => {
         name: user.name,
         email: user.email,
         token: token,
-        comments: user.comments,
+        image: user.image,
       };
 
       const userInfoString = JSON.stringify(userInfo);
       localStorage.setItem("user", userInfoString);
       localStorage.setItem("token", token);
       setUser(user);
-
-      // localStorage.setItem("token", response.data.token);
-      // setUser(response.data.user);
     } catch (error) {
       console.error("Login failed:", error);
       throw error;
@@ -113,17 +109,17 @@ const AuthProvider = ({ children }) => {
   //* Logout function
   const logout = () => {
     localStorage.removeItem("token");
-    // Remove user data from local storage
     localStorage.removeItem("user");
     setUser(null);
   };
 
   useEffect(() => {
+    //* Call checkAuth inside the useEffect to handle both authentication checks and local storage rehydration
     checkAuth();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, setUser, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
