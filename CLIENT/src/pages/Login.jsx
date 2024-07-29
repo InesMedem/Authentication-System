@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext.jsx";
+import { useState } from "react";
+import { useAuth } from "../context/authContext.jsx";
 import "./form.css";
 import FormRow from "../components/FormRow.jsx";
 // import Logo from "../components/Logo.jsx";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, login } = useContext(AuthContext);
+  const { login } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();

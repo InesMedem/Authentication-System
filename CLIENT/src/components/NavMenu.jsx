@@ -1,9 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../context/authContext";
+import { useAuth } from "../context/authContext";
 
 export const NavMenu = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useAuth();
 
   const navigate = useNavigate();
 
