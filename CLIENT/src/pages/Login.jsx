@@ -3,12 +3,13 @@ import { useAuth } from "../context/authContext.jsx";
 import "./form.css";
 import FormRow from "../components/FormRow.jsx";
 // import Logo from "../components/Logo.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,6 +28,7 @@ const Login = () => {
         setPassword("");
 
         alert("Login successful!");
+        navigate("/dashboard");
       } else {
         alert(
           `Login failed: invalid input, missing data, server-side validation errors, rate limiting, and other API-specific errors`
