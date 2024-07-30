@@ -19,16 +19,22 @@ const Login = () => {
     };
 
     try {
-      await login(formData); // Calling the loginUser function from API.js
+      const response = await login(formData); // Calling the loginUser function from API.js
 
       // Resetting form fields after successful login
-      setEmail("");
-      setPassword("");
+      if (response.status === 200) {
+        setEmail("");
+        setPassword("");
 
-      alert("Login successful!");
+        alert("Login successful!");
+      } else {
+        alert(
+          `Login failed: invalid input, missing data, server-side validation errors, rate limiting, and other API-specific errors`
+        );
+      }
     } catch (error) {
       alert(
-        `Login failed: something went wrong outside of the normal response handling, likely an issue with the network, server, or unhandled exceptions in the code.`
+        `Login failed: (input did not make it to the server) something went wrong outside of the normal response handling, likely an issue with the network, server, or unhandled exceptions in the code.`
       );
       console.error(error);
     }
@@ -67,8 +73,8 @@ const Login = () => {
         </p>
         <p>
           Forgotten your password?
-          <Link to="/resetpassword" className="member-btn">
-            Reset password
+          <Link to="/getpasscode" className="member-btn">
+            Login with passcode
           </Link>
         </p>
       </form>

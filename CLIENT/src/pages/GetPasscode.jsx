@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { resetPassword } from "../api/api";
+import { getPasscode } from "../api/api";
 import { useState } from "react";
-import FormRow from "../components/FormRow";
 
-const ResetPassword = () => {
+const GetPasscode = () => {
   const [email, setEmail] = useState("");
+  console.log("🚀 ~ GetPasscode ~ email:", email);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,7 +14,8 @@ const ResetPassword = () => {
     };
 
     try {
-      const response = await resetPassword(formData); // Calling the resetPassword function from API.js
+      const response = await getPasscode(formData); // Calling the resetPassword function from API.js
+      console.log("🚀 ~ handleSubmit ~ formData:", formData);
 
       // Resetting form fields after successful reset
       setEmail("");
@@ -31,10 +32,8 @@ const ResetPassword = () => {
   return (
     <div className="form-wrapper">
       <form className="form" id="resetPasswordForm" onSubmit={handleSubmit}>
-        <h4>Reset Password</h4>
-        <p>
-          Please provide your email in order to receive a temporary passcode
-        </p>
+        <h4>Get Passcode</h4>
+        <p>Please provide your email in order to receive a login passcode</p>
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -45,7 +44,7 @@ const ResetPassword = () => {
         ></input>
 
         <button className="btn btn-block" type="submit">
-          Send Passcode
+          Get Passcode
         </button>
         <p>
           Not a member yet?
@@ -58,4 +57,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default GetPasscode;

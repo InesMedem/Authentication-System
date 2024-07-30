@@ -1,12 +1,8 @@
 import App from "../App";
 import { createBrowserRouter } from "react-router-dom";
-import {
-  Login,
-  Register,
-  ResetPassword,
-  Dashboard,
-  ChangePassword,
-} from "../pages";
+import { Login, Register, Dashboard, ChangePassword } from "../pages";
+import GetPasscode from "../pages/GetPasscode";
+// import LoginPasscode from "../pages/LoginPasscode";
 
 export const router = createBrowserRouter([
   {
@@ -31,12 +27,13 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/resetpassword",
-        element: <ResetPassword />,
-      },
-      {
         path: "/changepassword",
         element: <ChangePassword />,
+      },
+
+      {
+        path: "/getpasscode",
+        element: <GetPasscode />,
       },
     ],
   },

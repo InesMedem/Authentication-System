@@ -15,7 +15,6 @@ const Register = () => {
     event.preventDefault();
 
     const formData = new FormData();
-    console.log("🚀 ~ handleSubmit ~ formData:", formData);
     formData.append("name", name);
     formData.append("email", email);
     formData.append("password", password);
@@ -35,7 +34,7 @@ const Register = () => {
         alert("Registration successful! Check you emial for confirmation code");
       } else {
         alert(
-          `Registration failed: invalid input, missing data, server-side validation errors, rate limiting, and other API-specific errors`
+          `Registration failed: (input did not make it to the server) invalid input, missing data, server-side validation errors, rate limiting, and other API-specific errors`
         );
       }
     } catch (error) {
