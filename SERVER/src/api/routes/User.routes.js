@@ -13,7 +13,7 @@ const UserRoutes = express.Router();
 UserRoutes.post("/register", upload.single("image"), register); //! image upload not working
 UserRoutes.post("/login", login);
 UserRoutes.patch("/getpasscode", getPasscode); // operation involves updating an existing resource
-UserRoutes.patch("/loginPasscode/:id", loginPasscode);
+UserRoutes.patch("/loginPasscode/:id", loginPasscode); // only internal url fore redirect
 
 //! ---------------- endPoints con auth -----------------------------
 

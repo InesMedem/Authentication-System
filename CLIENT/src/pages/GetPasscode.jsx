@@ -26,7 +26,7 @@ const GetPasscode = () => {
 
       if (response.status === 200) {
         alert("Passcode sent successfully!");
-        navigate("/checkcode");
+        navigate("/login");
       }
     } catch (error) {
       alert(`Passcode sending failed`);

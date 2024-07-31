@@ -91,7 +91,7 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
     const userDB = await User.findOne({ email });
     if (userDB) {
-      if (bcryptjs.compareSync(password, userDB.password)) {
+      if (bcrypt.compareSync(password, userDB.password)) {
         const token = generateToken(userDB._id, email);
         return res.status(200).json({
           user: userDB,
@@ -108,63 +108,7 @@ const login = async (req, res, next) => {
   }
 };
 
-// const resetPassword = async (req, res, next) => {
-//   try {
-//     const { email } = req.body;
-//     // variable to store the user with the email
-//     const userDB = await User.findOne({ email });
-
-//     // if the user exists
-//     if (userDB) {
-//       // get env variables
-//       const emailEnv = process.env.EMAIL;
-//       const password = process.env.PASSWORD;
-//       // send email
-//       const transporter = nodemailer.createTransport({
-//         service: "gmail",
-//         auth: {
-//           user: emailEnv,
-//           pass: password,
-//         },
-//       });
-
-//       const mailOptions = {
-//         from: emailEnv,
-//         to: email,
-//         subject: "Reset Password",
-//         text: `Your new password is ${newPassword}`,
-//       };
-
-//       transporter.sendMail(mailOptions, function (error, info) {
-//         if (error) {
-//           console.log(error);
-//           return res.status(404).json({
-//             user: userSave,
-//             confirmationCode: "error, resend code",
-//           });
-//         }
-//         // respond status 200
-//         console.log("Email sent: " + info.response);
-//         return res.status(200).json({
-//           user: userSave,
-//           confirmationCode,
-//         });
-//       });
-//     } else {
-//       // email failed to send
-//       return res.status(404).json("user not found");
-//     }
-//     // something is wrong with the resetPassword function in the API file
-//   } catch (error) {
-//     return res.status(404).json(error.message);
-//   }
-//   console.log(
-//     "🚀 ~ something is wrong with the resetPassword function in the API file",
-//     message
-//   );
-// };
-
-//------------------------------* FUERA  *-------------------------------------------------------------------
+// ✅ "getPasscode" "loginPasscode" work together
 
 const getPasscode = async (req, res, next) => {
   console.log("getPasscode endpoint hit with data:", req.body);
@@ -273,5 +217,61 @@ const loginPasscode = async (req, res, next) => {
     return next(error);
   }
 };
+
+// const resetPassword = async (req, res, next) => {
+//   try {
+//     const { email } = req.body;
+//     // variable to store the user with the email
+//     const userDB = await User.findOne({ email });
+
+//     // if the user exists
+//     if (userDB) {
+//       // get env variables
+//       const emailEnv = process.env.EMAIL;
+//       const password = process.env.PASSWORD;
+//       // send email
+//       const transporter = nodemailer.createTransport({
+//         service: "gmail",
+//         auth: {
+//           user: emailEnv,
+//           pass: password,
+//         },
+//       });
+
+//       const mailOptions = {
+//         from: emailEnv,
+//         to: email,
+//         subject: "Reset Password",
+//         text: `Your new password is ${newPassword}`,
+//       };
+
+//       transporter.sendMail(mailOptions, function (error, info) {
+//         if (error) {
+//           console.log(error);
+//           return res.status(404).json({
+//             user: userSave,
+//             confirmationCode: "error, resend code",
+//           });
+//         }
+//         // respond status 200
+//         console.log("Email sent: " + info.response);
+//         return res.status(200).json({
+//           user: userSave,
+//           confirmationCode,
+//         });
+//       });
+//     } else {
+//       // email failed to send
+//       return res.status(404).json("user not found");
+//     }
+//     // something is wrong with the resetPassword function in the API file
+//   } catch (error) {
+//     return res.status(404).json(error.message);
+//   }
+//   console.log(
+//     "🚀 ~ something is wrong with the resetPassword function in the API file",
+//     message
+//   );
+// };
 
 export { register, login, getPasscode, loginPasscode };
