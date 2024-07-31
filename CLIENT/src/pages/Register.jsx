@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import { registerUser } from "../api/api.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormRow from "../components/FormRow.jsx";
 import { useAuth } from "../context/authContext.jsx";
 
@@ -10,6 +10,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   // const [image, setImage] = useState(null);
   const { register } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,6 +33,7 @@ const Register = () => {
         // setImage(null);
 
         alert("Registration successful! Check you emial for confirmation code");
+        navigate("/checkcode");
       } else {
         alert(
           `Registration failed: (input did not make it to the server) invalid input, missing data, server-side validation errors, rate limiting, and other API-specific errors`

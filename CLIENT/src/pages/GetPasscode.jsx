@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getPasscode } from "../api/api";
 import { useState } from "react";
 
 const GetPasscode = () => {
   const [email, setEmail] = useState("");
   console.log("🚀 ~ GetPasscode ~ email:", email);
+  const [send, setSend] = useState(false);
+  const navigate = useNavigate();
 
+  //! 1)--------------------
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    //! 2) ----------------
     const formData = {
       email,
     };
@@ -22,6 +26,7 @@ const GetPasscode = () => {
 
       if (response.status === 200) {
         alert("Passcode sent successfully!");
+        navigate("/checkcode");
       }
     } catch (error) {
       alert(`Passcode sending failed`);
@@ -43,7 +48,7 @@ const GetPasscode = () => {
           required
         ></input>
 
-        <button className="btn btn-block" type="submit">
+        <button className="btn btn-block" type="submit" disabled={send}>
           Get Passcode
         </button>
         <p>

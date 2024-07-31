@@ -23,6 +23,8 @@ const loginUser = async (formData) => {
     .catch((error) => error);
 };
 
+//  *-------------------------------------------------------------------
+
 const getPasscode = async (formData) => {
   console.log("Sending request to /getpasscode with data:", formData);
   return APIGeneral.patch("/getpasscode", formData)
@@ -30,10 +32,10 @@ const getPasscode = async (formData) => {
     .catch((error) => error);
 };
 
-const resetPassword = async (formData) => {
-  return APIGeneral.post("/resetpassword", formData)
-    .then((res) => res)
-    .catch((error) => error);
-};
+// const resetPassword = async (formData) => {
+//   return APIGeneral.post("/resetpassword", formData)
+//     .then((res) => res)
+//     .catch((error) => error);
+// };
 
-export { registerUser, loginUser, resetPassword, getPasscode };
+export { registerUser, loginUser, getPasscode };

@@ -12,8 +12,8 @@ const UserRoutes = express.Router();
 
 UserRoutes.post("/register", upload.single("image"), register); //! image upload not working
 UserRoutes.post("/login", login);
-UserRoutes.get("/getpasscode", getPasscode); // operation involves updating an existing resource
-UserRoutes.patch("/loginPasscode", loginPasscode);
+UserRoutes.patch("/getpasscode", getPasscode); // operation involves updating an existing resource
+UserRoutes.patch("/loginPasscode/:id", loginPasscode);
 
 //! ---------------- endPoints con auth -----------------------------
 

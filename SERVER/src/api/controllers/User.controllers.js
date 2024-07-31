@@ -3,8 +3,9 @@ import User from "../models/User.model.js";
 import randomCode from "../../utils/randomCode.js";
 import nodemailer from "nodemailer";
 import validator from "validator";
-import bcryptjs from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { generateToken } from "../../utils/token.js";
+import randomPassword from "../../utils/randomPassword.js";
 
 const register = async (req, res, next) => {
   console.log("INSIDE CONTROLLER Request body:", req.body);
@@ -107,63 +108,61 @@ const login = async (req, res, next) => {
   }
 };
 
-//------------------------------* DENTRO  *-------------------------------------------------------------------
+// const resetPassword = async (req, res, next) => {
+//   try {
+//     const { email } = req.body;
+//     // variable to store the user with the email
+//     const userDB = await User.findOne({ email });
 
-const resetPassword = async (req, res, next) => {
-  try {
-    const { email } = req.body;
-    // variable to store the user with the email
-    const userDB = await User.findOne({ email });
+//     // if the user exists
+//     if (userDB) {
+//       // get env variables
+//       const emailEnv = process.env.EMAIL;
+//       const password = process.env.PASSWORD;
+//       // send email
+//       const transporter = nodemailer.createTransport({
+//         service: "gmail",
+//         auth: {
+//           user: emailEnv,
+//           pass: password,
+//         },
+//       });
 
-    // if the user exists
-    if (userDB) {
-      // get env variables
-      const emailEnv = process.env.EMAIL;
-      const password = process.env.PASSWORD;
-      // send email
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: emailEnv,
-          pass: password,
-        },
-      });
+//       const mailOptions = {
+//         from: emailEnv,
+//         to: email,
+//         subject: "Reset Password",
+//         text: `Your new password is ${newPassword}`,
+//       };
 
-      const mailOptions = {
-        from: emailEnv,
-        to: email,
-        subject: "Reset Password",
-        text: `Your new password is ${newPassword}`,
-      };
-
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-          return res.status(404).json({
-            user: userSave,
-            confirmationCode: "error, resend code",
-          });
-        }
-        // respond status 200
-        console.log("Email sent: " + info.response);
-        return res.status(200).json({
-          user: userSave,
-          confirmationCode,
-        });
-      });
-    } else {
-      // email failed to send
-      return res.status(404).json("user not found");
-    }
-    // something is wrong with the resetPassword function in the API file
-  } catch (error) {
-    return res.status(404).json(error.message);
-  }
-  console.log(
-    "🚀 ~ something is wrong with the resetPassword function in the API file",
-    message
-  );
-};
+//       transporter.sendMail(mailOptions, function (error, info) {
+//         if (error) {
+//           console.log(error);
+//           return res.status(404).json({
+//             user: userSave,
+//             confirmationCode: "error, resend code",
+//           });
+//         }
+//         // respond status 200
+//         console.log("Email sent: " + info.response);
+//         return res.status(200).json({
+//           user: userSave,
+//           confirmationCode,
+//         });
+//       });
+//     } else {
+//       // email failed to send
+//       return res.status(404).json("user not found");
+//     }
+//     // something is wrong with the resetPassword function in the API file
+//   } catch (error) {
+//     return res.status(404).json(error.message);
+//   }
+//   console.log(
+//     "🚀 ~ something is wrong with the resetPassword function in the API file",
+//     message
+//   );
+// };
 
 //------------------------------* FUERA  *-------------------------------------------------------------------
 
@@ -181,9 +180,9 @@ const getPasscode = async (req, res, next) => {
     const userDb = await User.findOne({ email });
     if (userDb) {
       console.log("User found:", userDb);
-      /// si existe hacemos el redirect
+      // / si existe hacemos el redirect
       const PORT = process.env.PORT;
-      console.log("Redirecting to:", redirectUrl);
+      console.log(`http://localhost:${PORT}/loginPasscode/${userDb._id}`);
 
       return res.redirect(
         307,
@@ -200,6 +199,8 @@ const getPasscode = async (req, res, next) => {
 };
 
 const loginPasscode = async (req, res, next) => {
+  console.log("loginPasscode endpoint hit with data:", req.body);
+
   try {
     /** VAMOS A BUSCAR AL USER POOR EL ID DEL PARAM */
     const { id } = req.params;
@@ -273,4 +274,4 @@ const loginPasscode = async (req, res, next) => {
   }
 };
 
-export { register, login, resetPassword, getPasscode, loginPasscode };
+export { register, login, getPasscode, loginPasscode };
