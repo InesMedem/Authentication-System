@@ -7,6 +7,8 @@ import bcrypt from "bcryptjs";
 import { generateToken } from "../../utils/token.js";
 import randomPassword from "../../utils/randomPassword.js";
 
+// ✅
+
 const register = async (req, res, next) => {
   console.log("INSIDE CONTROLLER Request body:", req.body);
   console.log("File:", req.file);
@@ -85,6 +87,8 @@ const register = async (req, res, next) => {
     return next(error);
   }
 };
+
+// ✅
 
 const login = async (req, res, next) => {
   try {
@@ -218,60 +222,58 @@ const loginPasscode = async (req, res, next) => {
   }
 };
 
-// const resetPassword = async (req, res, next) => {
-//   try {
-//     const { email } = req.body;
-//     // variable to store the user with the email
-//     const userDB = await User.findOne({ email });
+const modifyPassword = async (req, res, next) => {
+  /** IMPORTANTE ---> REQ.USER ----> LO CREAR LOS AUTH MIDDLEWARE */
+  console.log("req.user", req.user);
 
-//     // if the user exists
-//     if (userDB) {
-//       // get env variables
-//       const emailEnv = process.env.EMAIL;
-//       const password = process.env.PASSWORD;
-//       // send email
-//       const transporter = nodemailer.createTransport({
-//         service: "gmail",
-//         auth: {
-//           user: emailEnv,
-//           pass: password,
-//         },
-//       });
+  try {
+    const { password, newPassword } = req.body;
+    const { _id } = req.user;
 
-//       const mailOptions = {
-//         from: emailEnv,
-//         to: email,
-//         subject: "Reset Password",
-//         text: `Your new password is ${newPassword}`,
-//       };
+    /** comparamos la contrasela vieja sin encriptar y la encriptada */
+    if (bcrypt.compareSync(password, req.user.password)) {
+      /** tenemos que encriptar la contraseña para poder guardarla en el back mongo db */
+      const newPasswordHashed = bcrypt.hashSync(newPassword, 10);
 
-//       transporter.sendMail(mailOptions, function (error, info) {
-//         if (error) {
-//           console.log(error);
-//           return res.status(404).json({
-//             user: userSave,
-//             confirmationCode: "error, resend code",
-//           });
-//         }
-//         // respond status 200
-//         console.log("Email sent: " + info.response);
-//         return res.status(200).json({
-//           user: userSave,
-//           confirmationCode,
-//         });
-//       });
-//     } else {
-//       // email failed to send
-//       return res.status(404).json("user not found");
-//     }
-//     // something is wrong with the resetPassword function in the API file
-//   } catch (error) {
-//     return res.status(404).json(error.message);
-//   }
-//   console.log(
-//     "🚀 ~ something is wrong with the resetPassword function in the API file",
-//     message
-//   );
-// };
+      /** vamos a actualizar la contraseña en mongo db */
+      try {
+        await User.findByIdAndUpdate(_id, { password: newPasswordHashed });
 
-export { register, login, getPasscode, loginPasscode };
+        /** TESTING EN TIEMPO REAL  */
+
+        //1) Traemos el user actualizado
+        const userUpdate = await User.findById(_id);
+
+        // 2) vamos a comparar la contraseña sin encriptar y la tenemos en el back que esta encriptada
+        if (bcrypt.compareSync(newPassword, userUpdate.password)) {
+          /// SI SON IGUALES 200 ---> UPDATE OK
+          return res.status(200).json({
+            updateUser: true,
+          });
+        } else {
+          ///NO SON IGUALES -------> 404 no son iguales
+          return res.status(404).json({
+            updateUser: false,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json(error.message);
+      }
+    } else {
+      /** si las contraseñas no son iguales le mando un 404 diciendo que las contraseñas no son iguales */
+      return res.status(404).json("password dont match");
+    }
+  } catch (error) {
+    return next(error);
+    /**
+     * return next(
+      setError(
+        500,
+        error.message || 'Error general to ChangePassword with AUTH'
+      )
+    );
+     */
+  }
+};
+
+export { register, login, getPasscode, loginPasscode, modifyPassword };

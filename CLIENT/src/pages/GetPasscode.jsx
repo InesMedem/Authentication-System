@@ -4,22 +4,17 @@ import { useState } from "react";
 
 const GetPasscode = () => {
   const [email, setEmail] = useState("");
-  console.log("🚀 ~ GetPasscode ~ email:", email);
-  const [send, setSend] = useState(false);
   const navigate = useNavigate();
 
-  //! 1)--------------------
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    //! 2) ----------------
     const formData = {
       email,
     };
 
     try {
       const response = await getPasscode(formData); // Calling the resetPassword function from API.js
-      console.log("🚀 ~ handleSubmit ~ formData:", formData);
 
       // Resetting form fields after successful reset
       setEmail("");
@@ -48,7 +43,7 @@ const GetPasscode = () => {
           required
         ></input>
 
-        <button className="btn btn-block" type="submit" disabled={send}>
+        <button className="btn btn-block" type="submit">
           Get Passcode
         </button>
         <p>

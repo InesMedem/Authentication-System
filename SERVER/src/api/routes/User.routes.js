@@ -4,6 +4,7 @@ import {
   register,
   getPasscode,
   loginPasscode,
+  modifyPassword,
 } from "../controllers/User.controllers.js";
 import { upload } from "../../middleware/files.middleware.js";
 import { isAuth } from "../../middleware/auth.middleware.js";
@@ -17,6 +18,6 @@ UserRoutes.patch("/loginPasscode/:id", loginPasscode); // only internal url fore
 
 //! ---------------- endPoints con auth -----------------------------
 
-UserRoutes.patch("/changepassword", [isAuth]);
+UserRoutes.patch("/changepassword", [isAuth], modifyPassword);
 
 export default UserRoutes;
