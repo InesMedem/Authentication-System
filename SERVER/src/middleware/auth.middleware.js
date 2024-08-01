@@ -11,7 +11,6 @@ const isAuth = async (req, res, next) => {
 
   try {
     const decoded = verifyToken(token, process.env.JWT_SECRET);
-    console.log("🚀 ~ isAuth ~ token:", token);
     req.user = await User.findById(decoded.id);
     next();
   } catch (error) {

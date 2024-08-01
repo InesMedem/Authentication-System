@@ -25,7 +25,6 @@ const ChangePassword = () => {
       setPassword("");
 
       if (response.status === 200) {
-        console.log("🚀 ~ handleSubmit ~ response:", response);
         alert("Password changed successfully!");
         navigate("/dashboard");
       }

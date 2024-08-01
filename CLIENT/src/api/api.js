@@ -33,18 +33,23 @@ const loginUser = async (formData) => {
 };
 
 const getPasscode = async (formData) => {
-  console.log("Sending request to /getpasscode with data:", formData);
   return APIGeneral.patch("/getpasscode", formData)
     .then((res) => res)
     .catch((error) => error);
 };
 
 const resetPassword = async (formData) => {
-  console.log("Sending request to /changepassword with data:", formData);
-
   return APIGeneral.patch("/changepassword", formData)
     .then((res) => res)
     .catch((error) => error);
 };
 
-export { registerUser, loginUser, getPasscode, resetPassword };
+const changeName = async (formData) => {
+  console.log("Sending request to /changename with data:", formData);
+
+  return APIGeneral.patch("/changename", formData)
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export { registerUser, loginUser, getPasscode, resetPassword, changeName };

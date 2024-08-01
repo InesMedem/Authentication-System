@@ -18,24 +18,22 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
-      // {
-      //   path: "/profile",
-      //   element: <Profile />,
-      // },
       {
         path: "/dashboard",
         element: <Dashboard />,
       },
-
+      // inside the app
       {
         path: "/changepassword",
         element: <ChangePassword />,
       },
-
+      // only for Register and Login functions
       {
         path: "/checkcode",
         element: <CheckCode />,
       },
+
+      // outside the app
       {
         path: "/getpasscode",
         element: <GetPasscode />,

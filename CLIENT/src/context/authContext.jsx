@@ -10,6 +10,14 @@ export const AuthProvider = ({ children }) => {
     return user ? JSON.parse(user) : null;
   });
 
+  const updateUserName = (newName) => {
+    if (user) {
+      const updatedUser = { ...user, name: newName };
+      setUser(updatedUser); // Update state with new username
+      localStorage.setItem("user", JSON.stringify(updatedUser)); // Persist updated user to local storage
+    }
+  };
+
   // const [loading, setLoading] = useState(true);
 
   // const [deleteUser, setDeleteUser] = useState(false);
@@ -70,8 +78,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  //* Register function
-
   const register = async (formData) => {
     try {
       const response = await registerUser(formData);
@@ -84,15 +90,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  //* Logout function
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
   };
 
+  //* Check local storage for USER data on app load
   useEffect(() => {
-    // Check local storage for user data on app load
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -100,7 +105,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, setUser, login, register, logout, updateUserName }}
+    >
       {children}
     </AuthContext.Provider>
   );

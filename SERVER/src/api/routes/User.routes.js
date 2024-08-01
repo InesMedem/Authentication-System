@@ -5,6 +5,7 @@ import {
   getPasscode,
   loginPasscode,
   modifyPassword,
+  changeName,
 } from "../controllers/User.controllers.js";
 import { upload } from "../../middleware/files.middleware.js";
 import { isAuth } from "../../middleware/auth.middleware.js";
@@ -14,10 +15,14 @@ const UserRoutes = express.Router();
 UserRoutes.post("/register", upload.single("image"), register); //! image upload not working
 UserRoutes.post("/login", login);
 UserRoutes.patch("/getpasscode", getPasscode); // operation involves updating an existing resource
-UserRoutes.patch("/loginPasscode/:id", loginPasscode); // only internal url fore redirect
 
 //! ---------------- endPoints con auth -----------------------------
 
 UserRoutes.patch("/changepassword", [isAuth], modifyPassword);
+UserRoutes.patch("/changename", [isAuth], changeName);
+
+//! ---------------- endPoints redirect -----------------------------
+
+UserRoutes.patch("/loginPasscode/:id", loginPasscode); // only internal url fore redirect
 
 export default UserRoutes;

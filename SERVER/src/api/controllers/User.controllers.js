@@ -112,7 +112,7 @@ const login = async (req, res, next) => {
   }
 };
 
-// ✅ "getPasscode" "loginPasscode" work together
+// ✅ PASSWORD RESET OUTSIDE APP (getpasscode + loginpasscode)
 
 const getPasscode = async (req, res, next) => {
   console.log("getPasscode endpoint hit with data:", req.body);
@@ -222,14 +222,14 @@ const loginPasscode = async (req, res, next) => {
   }
 };
 
+// ✅ INSIDE APP
+
 const modifyPassword = async (req, res, next) => {
   /** IMPORTANTE ---> REQ.USER ----> LO CREAR LOS AUTH MIDDLEWARE */
 
   try {
     const { password, newPassword } = req.body;
-    console.log("🚀 ~ INDISE FUNCTION ~ password:", password);
     const { _id } = req.user;
-    console.log("🚀 ~ modifyPassword ~ _id:", _id);
 
     /** comparamos la contrasela vieja sin encriptar y la encriptada */
     if (bcrypt.compareSync(password, req.user.password)) {
@@ -277,4 +277,25 @@ const modifyPassword = async (req, res, next) => {
   }
 };
 
-export { register, login, getPasscode, loginPasscode, modifyPassword };
+const changeName = async (req, res, next) => {
+  try {
+    const { name } = req.body;
+    console.log("🚀 ~ changeName ~ name:", name);
+    const { _id } = req.user;
+    await User.findByIdAndUpdate(_id, { name });
+    return res.status(200).json({
+      name: name,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export {
+  register,
+  login,
+  getPasscode,
+  loginPasscode,
+  modifyPassword,
+  changeName,
+};
