@@ -1,11 +1,20 @@
 import axios from "axios";
 
+const updateToken = () => {
+  const user = localStorage.getItem("user");
+  if (user) {
+    const parseUser = JSON.parse(user);
+    return parseUser.token;
+  }
+};
+
 const APIGeneral = axios.create({
   //  https://authentication-system-seven.vercel.app
   baseURL: "http://localhost:3001",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
+    Authorization: `Bearer ${updateToken()}`,
   },
 });
 
@@ -23,8 +32,6 @@ const loginUser = async (formData) => {
     .catch((error) => error);
 };
 
-//  *-------------------------------------------------------------------
-
 const getPasscode = async (formData) => {
   console.log("Sending request to /getpasscode with data:", formData);
   return APIGeneral.patch("/getpasscode", formData)
@@ -32,10 +39,12 @@ const getPasscode = async (formData) => {
     .catch((error) => error);
 };
 
-// const resetPassword = async (formData) => {
-//   return APIGeneral.post("/resetpassword", formData)
-//     .then((res) => res)
-//     .catch((error) => error);
-// };
+const resetPassword = async (formData) => {
+  console.log("Sending request to /changepassword with data:", formData);
 
-export { registerUser, loginUser, getPasscode };
+  return APIGeneral.patch("/changepassword", formData)
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export { registerUser, loginUser, getPasscode, resetPassword };

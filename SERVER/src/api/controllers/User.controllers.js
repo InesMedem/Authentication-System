@@ -224,11 +224,12 @@ const loginPasscode = async (req, res, next) => {
 
 const modifyPassword = async (req, res, next) => {
   /** IMPORTANTE ---> REQ.USER ----> LO CREAR LOS AUTH MIDDLEWARE */
-  console.log("req.user", req.user);
 
   try {
     const { password, newPassword } = req.body;
+    console.log("🚀 ~ INDISE FUNCTION ~ password:", password);
     const { _id } = req.user;
+    console.log("🚀 ~ modifyPassword ~ _id:", _id);
 
     /** comparamos la contrasela vieja sin encriptar y la encriptada */
     if (bcrypt.compareSync(password, req.user.password)) {

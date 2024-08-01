@@ -31,7 +31,7 @@ const GetPasscode = () => {
 
   return (
     <div className="form-wrapper">
-      <form className="form" id="resetPasswordForm" onSubmit={handleSubmit}>
+      <form className="form" id="getPasswordForm" onSubmit={handleSubmit}>
         <h4>Get Passcode</h4>
         <p>Please provide your email in order to receive a login passcode</p>
         <label htmlFor="email">Email:</label>
