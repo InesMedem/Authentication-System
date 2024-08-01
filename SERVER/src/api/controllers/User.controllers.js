@@ -277,15 +277,28 @@ const modifyPassword = async (req, res, next) => {
   }
 };
 
+// ✅ INSIDE APP
+
 const changeName = async (req, res, next) => {
   try {
     const { name } = req.body;
-    console.log("🚀 ~ changeName ~ name:", name);
     const { _id } = req.user;
     await User.findByIdAndUpdate(_id, { name });
     return res.status(200).json({
       name: name,
     });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//  DELETE USER
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const { _id } = req.user;
+    await User.findByIdAndDelete(_id);
+    return res.status(200).json("User deleted");
   } catch (error) {
     return next(error);
   }
@@ -298,4 +311,5 @@ export {
   loginPasscode,
   modifyPassword,
   changeName,
+  deleteUser,
 };

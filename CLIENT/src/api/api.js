@@ -45,11 +45,22 @@ const resetPassword = async (formData) => {
 };
 
 const changeName = async (formData) => {
-  console.log("Sending request to /changename with data:", formData);
-
   return APIGeneral.patch("/changename", formData)
     .then((res) => res)
     .catch((error) => error);
 };
 
-export { registerUser, loginUser, getPasscode, resetPassword, changeName };
+const deleteUser = async () => {
+  return APIGeneral.delete("/deleteuser")
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export {
+  registerUser,
+  loginUser,
+  getPasscode,
+  resetPassword,
+  changeName,
+  deleteUser,
+};

@@ -6,6 +6,7 @@ import {
   loginPasscode,
   modifyPassword,
   changeName,
+  deleteUser,
 } from "../controllers/User.controllers.js";
 import { upload } from "../../middleware/files.middleware.js";
 import { isAuth } from "../../middleware/auth.middleware.js";
@@ -20,6 +21,7 @@ UserRoutes.patch("/getpasscode", getPasscode); // operation involves updating an
 
 UserRoutes.patch("/changepassword", [isAuth], modifyPassword);
 UserRoutes.patch("/changename", [isAuth], changeName);
+UserRoutes.delete("/deleteuser", [isAuth], deleteUser);
 
 //! ---------------- endPoints redirect -----------------------------
 
