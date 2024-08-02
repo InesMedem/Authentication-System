@@ -30,7 +30,7 @@ const Register = () => {
         setName("");
         setEmail("");
         setPassword("");
-        // setImage(null);
+        setImage(null);
 
         alert("Registration successful! Check you emial for confirmation code");
         navigate("/checkcode");
@@ -89,6 +89,7 @@ const Register = () => {
           id="image"
           onChange={(e) => setImage(e.target.files[0])}
           accept="image/*"
+          required={false}
         />
 
         <button type="submit" className="btn-block">
