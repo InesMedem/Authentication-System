@@ -58,19 +58,19 @@ export const AuthProvider = ({ children }) => {
   const login = async (formData) => {
     try {
       const response = await loginUser(formData);
-      const { user, token } = response.data;
+      const { user } = response.data;
 
       const userInfo = {
         name: user.name,
         email: user.email,
-        token: token,
+        //! token: token,
         image: user.image,
       };
 
       const userInfoString = JSON.stringify(userInfo);
       localStorage.setItem("user", userInfoString);
-      localStorage.setItem("token", token);
-      setUser(user);
+      //! localStorage.setItem("token", token);
+      setUser(user); // Update application state with user information
       return response;
     } catch (error) {
       console.error("Login failed:", error);
@@ -81,9 +81,11 @@ export const AuthProvider = ({ children }) => {
   const register = async (formData) => {
     try {
       const response = await registerUser(formData);
-      localStorage.setItem("token", response.data.token);
-      setUser(response.data.user);
-      return response;
+
+      if (response.status === 200) return await login(formData);
+      else {
+        throw new Error("Registration failed"); // Handle unexpected status codes
+      }
     } catch (error) {
       console.error("Registration failed:", error);
       throw error;
@@ -91,7 +93,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    //! localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
   };
