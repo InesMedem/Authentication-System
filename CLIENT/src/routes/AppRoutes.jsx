@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 import { Login, Register, Dashboard, ChangePassword } from "../pages";
 import GetPasscode from "../pages/GetPasscode";
 import CheckCode from "../pages/CheckCode";
-// import LoginPasscode from "../pages/LoginPasscode";
 
 export const router = createBrowserRouter([
   {

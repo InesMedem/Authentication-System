@@ -8,7 +8,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null);
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -19,9 +19,9 @@ const Register = () => {
     formData.append("name", name);
     formData.append("email", email);
     formData.append("password", password);
-    // if (image) {
-    //   formData.append("image", image);
-    // }
+    if (image) {
+      formData.append("image", image);
+    }
 
     try {
       const response = await register(formData);
@@ -83,13 +83,13 @@ const Register = () => {
           letter, 1 uppercase letter, 1 number, and 1 symbol.
         </p>
 
-        {/* <label htmlFor="profileImage">Profile Image (optional):</label> */}
-        {/* <FormRow
+        <label htmlFor="profileImage">Profile Image (optional):</label>
+        <FormRow
           type="file"
           id="image"
           onChange={(e) => setImage(e.target.files[0])}
           accept="image/*"
-        /> */}
+        />
 
         <button type="submit" className="btn-block">
           Register
