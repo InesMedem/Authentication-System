@@ -45,6 +45,7 @@ const resetPassword = async (formData) => {
 };
 
 const changeName = async (formData) => {
+  // console.log("🚀 ~ changeName ~ formData:", formData);
   return APIGeneral.patch("/changename", formData)
     .then((res) => res)
     .catch((error) => error);

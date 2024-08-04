@@ -297,10 +297,35 @@ const changeName = async (req, res, next) => {
 const deleteUser = async (req, res, next) => {
   try {
     const { _id } = req.user;
+    const { image } = req.user;
+    if (image) {
+      await deleteImgCloudinary(image);
+    }
+
     await User.findByIdAndDelete(_id);
-    return res.status(200).json("User deleted");
+    return res.status(200).json("User deleted successfully");
   } catch (error) {
     return next(error);
+  }
+};
+
+//  Get all
+
+const getAll = async (req, res, next) => {
+  try {
+    const allUsers = await User.find();
+    if (allUsers.length > 0) {
+      return res.status(200).json(allUsers);
+    } else {
+      return res.status(404).json({
+        error: "error finding users (from catch)",
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      error: "error al buscar - lanzado en el catch",
+      message: error.message,
+    });
   }
 };
 
@@ -312,4 +337,5 @@ export {
   modifyPassword,
   changeName,
   deleteUser,
+  getAll,
 };

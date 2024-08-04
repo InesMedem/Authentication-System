@@ -8,6 +8,7 @@ const Dashboard = () => {
   const [name, setName] = useState("");
   const { user, updateUserName } = useAuth();
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleSubmitChangename = async (event) => {
     event.preventDefault();
@@ -34,9 +35,10 @@ const Dashboard = () => {
       const response = await deleteUser();
 
       if (response.status === 200) {
-        alert("User deleted successfully");
         localStorage.removeItem("user");
+        logout();
         navigate("/login");
+        alert("User deleted successfully");
       }
     } catch (error) {
       alert(`Failed to delete user`);

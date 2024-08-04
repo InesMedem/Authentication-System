@@ -36,7 +36,7 @@ const Register = () => {
         navigate("/checkcode");
       } else {
         alert(
-          `Registration failed: (input did not make it to the server) invalid input, missing data, server-side validation errors, rate limiting, and other API-specific errors`
+          `Registration failed: user probablly exist already, invalid input, missing data, server-side validation errors, rate limiting, and other API-specific errors`
         );
       }
     } catch (error) {

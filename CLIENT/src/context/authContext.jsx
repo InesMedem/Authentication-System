@@ -58,12 +58,12 @@ export const AuthProvider = ({ children }) => {
   const login = async (formData) => {
     try {
       const response = await loginUser(formData);
-      const { user } = response.data;
+      const { user, token } = response.data;
 
       const userInfo = {
         name: user.name,
         email: user.email,
-        //! token: token,
+        token: token,
         image: user.image,
       };
 
