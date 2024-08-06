@@ -13,7 +13,7 @@ export const NavMenu = () => {
 
   return (
     <nav>
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/home">Home</NavLink>
 
       {user === null && (
         <NavLink to="/register">

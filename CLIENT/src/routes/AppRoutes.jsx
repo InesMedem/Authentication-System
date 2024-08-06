@@ -3,12 +3,22 @@ import { createBrowserRouter } from "react-router-dom";
 import { Login, Register, Dashboard, ChangePassword } from "../pages";
 import GetPasscode from "../pages/GetPasscode";
 import CheckCode from "../pages/CheckCode";
+import Home from "../pages/Home";
+import RestcountriesAPI from "../api/RestcountriesAPI";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "/home",
+        element: <Home />,
+      },
+      {
+        path: "/countries",
+        element: <RestcountriesAPI />,
+      },
       {
         path: "/register",
         element: <Register />,
