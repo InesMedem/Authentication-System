@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { registerUser } from "../api/api.js";
 import { Link, useNavigate } from "react-router-dom";
 import FormRow from "../components/FormRow.jsx";
 import { useAuth } from "../context/authContext.jsx";

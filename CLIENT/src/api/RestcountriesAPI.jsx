@@ -22,7 +22,6 @@ const RestcountriesAPI = () => {
         if (!response.ok) {
           throw new Error("Netwrok response was not ok");
         }
-        console.log("Fetching data from /api/v3.1/all");
 
         const result = await response.json();
         setData(result); // update teh stata state

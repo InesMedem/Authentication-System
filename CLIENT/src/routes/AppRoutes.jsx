@@ -1,8 +1,13 @@
 import App from "../App";
 import { createBrowserRouter } from "react-router-dom";
-import { Login, Register, Dashboard, ChangePassword } from "../pages";
+import {
+  Login,
+  Register,
+  Dashboard,
+  ChangePassword,
+  CheckCode,
+} from "../pages";
 import GetPasscode from "../pages/GetPasscode";
-import CheckCode from "../pages/CheckCode";
 import Home from "../pages/Home";
 import RestcountriesAPI from "../api/RestcountriesAPI";
 

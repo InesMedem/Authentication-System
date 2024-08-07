@@ -14,7 +14,6 @@
   max-width: 400px;
   border-top: 5px solid var(--primary-500);
   width: 100%;
-
 }
 h4 {
   text-align: center;
@@ -32,4 +31,33 @@ p {
   color: var(--primary-500);
   letter-spacing: var(--letter-spacing);
   margin-left: 0.25rem;
+}
+
+/* form.css */
+.spinner {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Add any desired spinner animation or style */
+.spinner:before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 4px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
