@@ -18,6 +18,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUserImage = (newImg) => {
+    if (user) {
+      const updatedImg = { ...user, image: newImg };
+      setUser(updatedImg);
+      localStorage.setItem("user", JSON.stringify(updatedImg));
+    }
+  };
+
   // const [loading, setLoading] = useState(true);
 
   // const [deleteUser, setDeleteUser] = useState(false);
@@ -108,7 +116,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, login, register, logout, updateUserName }}
+      value={{
+        user,
+        setUser,
+        login,
+        register,
+        logout,
+        updateUserName,
+        updateUserImage,
+      }}
     >
       {children}
     </AuthContext.Provider>

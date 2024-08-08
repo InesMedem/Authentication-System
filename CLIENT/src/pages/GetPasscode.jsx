@@ -5,6 +5,7 @@ import { useState } from "react";
 const GetPasscode = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,6 +15,7 @@ const GetPasscode = () => {
     };
 
     try {
+      setLoading(true);
       const response = await getPasscode(formData); // Calling the resetPassword function from API.js
 
       // Resetting form fields after successful reset
@@ -25,34 +27,39 @@ const GetPasscode = () => {
       }
     } catch (error) {
       alert(`Passcode sending failed`);
+      setLoading(false);
       console.error(error);
     }
   };
 
   return (
     <div className="form-wrapper">
-      <form className="form" id="getPasswordForm" onSubmit={handleSubmit}>
-        <h4>Get Passcode</h4>
-        <p>Please provide your email in order to receive a login passcode</p>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        ></input>
+      {loading ? (
+        <div className="spinner"> Loading... </div>
+      ) : (
+        <form className="form" id="getPasswordForm" onSubmit={handleSubmit}>
+          <h4>Get Passcode</h4>
+          <p>Please provide your email in order to receive a login passcode</p>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          ></input>
 
-        <button className="btn btn-block" type="submit">
-          Get Passcode
-        </button>
-        <p>
-          Not a member yet?
-          <Link to="/register" className="member-btn">
-            Register
-          </Link>
-        </p>
-      </form>
+          <button className="btn btn-block" type="submit">
+            Get Passcode
+          </button>
+          <p>
+            Not a member yet?
+            <Link to="/register" className="member-btn">
+              Register
+            </Link>
+          </p>
+        </form>
+      )}
     </div>
   );
 };

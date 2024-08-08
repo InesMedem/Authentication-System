@@ -309,6 +309,37 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+// CHANGE IMAGE
+
+const changeImage = async (req, res, next) => {
+  const _id = req.user._id;
+  if (!req.file) {
+    return res.status(400).json({
+      message: "No image file provided",
+    });
+  }
+
+  const imagePath = req.file.path;
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      _id,
+      { image: imagePath },
+      { new: true }
+    );
+    if (!user) {
+      return res.status(404).json({
+        message: "user not found",
+      });
+    }
+    return res.status(200).json({
+      image: user.image,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 //  Get all
 
 const getAll = async (req, res, next) => {
@@ -338,4 +369,5 @@ export {
   changeName,
   deleteUser,
   getAll,
+  changeImage,
 };

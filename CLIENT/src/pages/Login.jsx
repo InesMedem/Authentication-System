@@ -1,8 +1,7 @@
+import "./styles.css";
 import { useState } from "react";
 import { useAuth } from "../context/authContext.jsx";
-import "./styles.css";
 import FormRow from "../components/FormRow.jsx";
-// import Logo from "../components/Logo.jsx";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {

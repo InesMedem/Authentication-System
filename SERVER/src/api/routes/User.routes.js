@@ -8,19 +8,22 @@ import {
   changeName,
   deleteUser,
   getAll,
+  changeImage,
 } from "../controllers/User.controllers.js";
 import { upload } from "../../middleware/files.middleware.js";
 import { isAuth } from "../../middleware/auth.middleware.js";
 
 const UserRoutes = express.Router();
 
+//! ---------------- endPoints -----------------------------
+
 UserRoutes.post("/register", upload.single("image"), register);
 UserRoutes.post("/login", login);
 UserRoutes.patch("/getpasscode", getPasscode); // operation involves updating an existing resource, this is why its patch
 UserRoutes.get("/getAll", getAll);
 
-//! ---------------- endPoints con auth -----------------------------
-
+//! ---------------- endPoints with auth -----------------------------
+UserRoutes.post("/changeimg", upload.single("image"), [isAuth], changeImage);
 UserRoutes.patch("/changepassword", [isAuth], modifyPassword);
 UserRoutes.patch("/changename", [isAuth], changeName);
 UserRoutes.delete("/deleteuser", [isAuth], deleteUser);

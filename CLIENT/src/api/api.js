@@ -45,8 +45,17 @@ const resetPassword = async (formData) => {
 };
 
 const changeName = async (formData) => {
-  // console.log("🚀 ~ changeName ~ formData:", formData);
   return APIGeneral.patch("/changename", formData)
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+const changeImg = async (formData) => {
+  console.log("entering api");
+
+  return APIGeneral.patch("/changeimg", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  })
     .then((res) => res)
     .catch((error) => error);
 };
@@ -64,4 +73,5 @@ export {
   resetPassword,
   changeName,
   deleteUser,
+  changeImg,
 };

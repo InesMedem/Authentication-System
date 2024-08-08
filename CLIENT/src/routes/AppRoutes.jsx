@@ -9,7 +9,6 @@ import {
 } from "../pages";
 import GetPasscode from "../pages/GetPasscode";
 import Home from "../pages/Home";
-import RestcountriesAPI from "../api/RestcountriesAPI";
 
 export const router = createBrowserRouter([
   {
@@ -20,10 +19,7 @@ export const router = createBrowserRouter([
         path: "/home",
         element: <Home />,
       },
-      {
-        path: "/countries",
-        element: <RestcountriesAPI />,
-      },
+
       {
         path: "/register",
         element: <Register />,
