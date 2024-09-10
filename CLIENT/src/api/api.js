@@ -9,8 +9,8 @@ const updateToken = () => {
 };
 
 const APIGeneral = axios.create({
-  //  https://authentication-system-seven.vercel.app
-  baseURL: "http://localhost:3001",
+  //  http://localhost:3001
+  baseURL: "https://authentication-system-seven.vercel.app",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

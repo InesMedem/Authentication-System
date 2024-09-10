@@ -111,7 +111,7 @@ const Dashboard = () => {
 
           {/* Change profile photo */}
 
-          <form onSubmit={handleUploadImage}>
+          {/* <form onSubmit={handleUploadImage}>
             <label>Change profile photo</label>
             <FormRow
               type="file"
@@ -123,7 +123,7 @@ const Dashboard = () => {
             <button className="btn-block" type="submit">
               Change
             </button>
-          </form>
+          </form> */}
 
           <Link to="/changepassword">
             <p>Change password</p>

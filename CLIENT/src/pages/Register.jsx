@@ -35,7 +35,7 @@ const Register = () => {
         setImage(null);
 
         alert("Registration successful! Check you emial for confirmation code");
-        navigate("/checkcode");
+        navigate("/dashboard");
       } else {
         alert(
           `Registration failed: user probablly exist already, invalid input, missing data, server-side validation errors, rate limiting, and other API-specific errors`
